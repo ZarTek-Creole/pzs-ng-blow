@@ -36,3 +36,4 @@ Makefile
 /zipscript/utils/headdatatest
 /zipscript/utils/racedatatest
 /zipscript/utils/sfvdatatest
+sitebot/plugins/Blow.cfg
