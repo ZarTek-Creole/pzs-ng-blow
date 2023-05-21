@@ -411,7 +411,6 @@ namespace eval ::ngBot::plugin::Blow {
   proc decryptMsg {target message} {
     variable ns
     set data                    [${ns}::getKey $target]
-    putlog "$data decryptMsg ($target) *** $message"
     set mode                    [keyToEncryptMode $data]
     set key                     [getKeyWithoutEncryptMode $data]
     return [decrypt $mode:$key $message]
@@ -504,7 +503,6 @@ namespace eval ::ngBot::plugin::Blow {
     variable blowkey
     variable plainTextWarningMsg
     set target                  [lindex $text 0]
-    putlog "incomingRawtPRIVMSG: (target '$target') $from ** $type *** $text *** $tag"
     set key                     [${ns}::getKey $target]
     set message                 [lrange $text 1 end]
     set mprefix                 [lindex $message 0]
@@ -585,7 +583,6 @@ namespace eval ::ngBot::plugin::Blow {
     }
     # i have a key, and user talk with encryption
     set tmp                     [decryptMsg $target $mfished]
-    putlog "incomingRawtPRIVMSG: decryptMsg $target $mfished tmp '$tmp'"
     # From the eggdrop server help: "exclusive-binds:
     #   This setting configures PUBM and MSGM binds to be exclusive of PUB and MSG binds."
     set mExecuted               0
@@ -824,7 +821,6 @@ namespace eval ::ngBot::plugin::Blow {
     set variables(SETTOPIC)     "%channel %topic"
     set variables(GETTOPIC)     "%topic"
     if {[catch {source $config_file} error]} {
-      putlog "$config_file"
       ${ns}::Error "Unable to source config file: $error"
       return -code -1
     }
